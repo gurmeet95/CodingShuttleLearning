@@ -2,6 +2,8 @@ package com.codingshuttle.learning.contollers;
 
 
 import com.codingshuttle.learning.dto.EmployeeDTO;
+import com.codingshuttle.learning.entities.EmployeeEntity;
+import com.codingshuttle.learning.repositpries.EmployeeRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -10,39 +12,30 @@ import java.util.List;
 @RestController
 @RequestMapping("/employees")
 public class EmployeeController {
-//    @GetMapping("/getMessage")
-//    public String getSecretMessage(){
-//        return "Hello Mr. Gurmeet Chahal";
-//    }
+    private final EmployeeRepository employeeRepository;
+    public EmployeeController(EmployeeRepository employeeRepository){
+        this.employeeRepository=employeeRepository;
+    }
+    //Not good practice repository need to contact with service layer not Controller directly.
+    //Not entity also can not be present in controller class.
 
     @GetMapping("/{employeeID}")
-    //@PathVariable name must be same as Mapping name (@PathVariable  Long employeeID) or
-    public EmployeeDTO getEmployeeByID(@PathVariable(name ="employeeId")  Long id){
+    public EmployeeEntity getEmployeeByID(@PathVariable(name ="employeeId")  Long id){
 
-         return new EmployeeDTO(id,"Anuj","abc@gmail.com",28, LocalDate.of(2024,2,12),true);
+         return employeeRepository.findById(id).orElse(null);
     }
 
-     //@GetMapping(path="/employees")
-     //This is fine but using RequestMapping("/employees") is good to use parent path.
-    //After that @GetMapping(
-    @RequestMapping // not good way to use @RequestMapping here
-    public String getAllEmployees(@RequestParam(required =false,name="inputAge") Integer age,
+    @GetMapping
+    public List<EmployeeEntity> getAllEmployees(@RequestParam(required =false,name="inputAge") Integer age,
                                   @RequestParam(required = false) String sortBy){
-        return "Hi age "+age+" "+sortBy;
+        return employeeRepository.findAll();
     }
 
-//    @PostMapping
-//    //it also works with "/employees" only but in browser only get mapping is worked.
-//    // so we only able to check get mapping only for post we need postman etc.
-//    public String createNewEmployee(){
-//        return "Hello From Post";
-//    }
+
 
     @PostMapping
-    public EmployeeDTO createNewEmployee(@RequestBody EmployeeDTO inputEmployee){
-        //Here @RequestBody is used to bind the http request body to a Java object.
-        inputEmployee.setId(100L);
-        return inputEmployee;
+    public EmployeeEntity createNewEmployee(@RequestBody EmployeeEntity inputEmployee){
+       return employeeRepository.save(inputEmployee);
     }
 
     @PutMapping String updateEmpById(){

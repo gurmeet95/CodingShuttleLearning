@@ -2,5 +2,22 @@ spring:
   application:
     name: learning
 
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+  main:
+    web-application-type: servlet
+
+  datasource:
+    url: jdbc:h2:file:./data/test-db
+    username: gurmeet
+    password: 1234
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
 notification:
     type: email
