@@ -11,7 +11,7 @@ public class EmployeeDTO {
     private String email;
     private Integer age;
     private LocalDate dateOfJoining;
-    private Boolean isActive;
+    private Boolean active;
     public EmployeeDTO(){
 
     }
@@ -25,7 +25,7 @@ public class EmployeeDTO {
         this.email = email;
         this.age = age;
         this.dateOfJoining = dateOfJoining;
-        this.isActive = isActive;
+        this.active = isActive;
     }
 
     public Long getId() {
@@ -68,12 +68,12 @@ public class EmployeeDTO {
         this.dateOfJoining = dateOfJoining;
     }
 
-    public Boolean isActive() {
-        return isActive;
+    public Boolean getActive() {
+        return active;
     }
 
     public void setActive(Boolean active) {
-        isActive = active;
+        this.active = active;
     }
 
 
