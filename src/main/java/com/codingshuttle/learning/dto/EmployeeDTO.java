@@ -19,13 +19,13 @@ public class EmployeeDTO {
 
 
     public EmployeeDTO(Long id, String name, String email,
-                       Integer age, LocalDate dateOfJoining, Boolean isActive) {
+                       Integer age, LocalDate dateOfJoining, Boolean active) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.age = age;
         this.dateOfJoining = dateOfJoining;
-        this.active = isActive;
+        this.active = active;
     }
 
     public Long getId() {
