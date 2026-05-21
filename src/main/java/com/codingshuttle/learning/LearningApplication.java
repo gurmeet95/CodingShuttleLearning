@@ -25,6 +25,7 @@ public class LearningApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args)throws Exception{
 		System.out.println(payment.hashCode());
+		//These both bean will have same hashcode because default scope of bean is Singleton.
 		System.out.println(payment1.hashCode());
 		payment.paying(); //cannot call this from main static method
 		payment1.paying();
