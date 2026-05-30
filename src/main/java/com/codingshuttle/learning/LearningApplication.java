@@ -13,7 +13,7 @@ public class LearningApplication implements CommandLineRunner {
 	final NotificationService notificationService; // injecting dependency, but not a good way
 	// for production.This is called field dependency injection.
 	public LearningApplication( NotificationService notificationService){
-		//@Qualifier("email") removed it before NotificationService notificationService
+		//@Qualifier("email") removed it before NotificationService notificationService in arguments.
 		// because using Conditional property
 		this.notificationService=notificationService; // Constructor DI
 		// Preferred way
