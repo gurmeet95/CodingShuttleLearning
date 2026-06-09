@@ -19,7 +19,7 @@ public class EmployeeController {
     //Not good practice repository need to contact with service layer not Controller directly.
     //Not entity also can not be present in controller class.
 
-    @GetMapping("/{employeeID}")
+    @GetMapping("/{employeeId}")
     public EmployeeEntity getEmployeeByID(@PathVariable(name ="employeeId")  Long id){
 
          return employeeRepository.findById(id).orElse(null);
