@@ -3,10 +3,12 @@ package com.codingshuttle.learning.contollers;
 
 import com.codingshuttle.learning.dto.EmployeeDTO;
 import com.codingshuttle.learning.services.EmployeeService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -41,13 +43,13 @@ public class EmployeeController {
 
 
     @PostMapping
-    public ResponseEntity<EmployeeDTO> createNewEmployee(@RequestBody EmployeeDTO inputEmployee){
+    public ResponseEntity<EmployeeDTO> createNewEmployee(@RequestBody @Valid EmployeeDTO inputEmployee){
        EmployeeDTO savedEmployee=employeeService.createNewEmployee(inputEmployee);
        return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
     }
 
     @PutMapping(path="/{employeeID}")
-    public ResponseEntity<EmployeeDTO> updateEmployeeById(@RequestBody EmployeeDTO employeeDTO,@PathVariable Long employeeID){
+    public ResponseEntity<EmployeeDTO> updateEmployeeById(@RequestBody @Valid  EmployeeDTO employeeDTO,@PathVariable Long employeeID){
         return ResponseEntity.ok(employeeService.updateEmployeeByID(employeeID,employeeDTO));
         //If with @PutMapping we try to update name only,other data will set to null itself.
     }
@@ -64,9 +66,9 @@ public class EmployeeController {
                                                  @PathVariable Long employeeID){
         EmployeeDTO employeeDTO= employeeService.updatePartialEmployeeById(employeeID,updates);
         if(employeeDTO==null) return ResponseEntity.notFound().build();
+
         return ResponseEntity.ok(employeeDTO);
     }
-
 }
 
 

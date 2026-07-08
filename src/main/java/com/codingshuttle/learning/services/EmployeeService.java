@@ -4,6 +4,7 @@ import com.codingshuttle.learning.dto.EmployeeDTO;
 import com.codingshuttle.learning.entities.EmployeeEntity;
 import com.codingshuttle.learning.repositpries.EmployeeRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
@@ -21,7 +22,6 @@ import java.util.stream.Collectors;
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final ModelMapper modelMapper;
-
     public EmployeeService(EmployeeRepository employeeRepository,ModelMapper modelMapper){
         this.employeeRepository=employeeRepository;
         this.modelMapper=modelMapper;
